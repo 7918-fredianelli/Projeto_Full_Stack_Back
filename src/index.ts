@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import {AddressInfo} from "net";
 import express from "express";
 import { userRouter } from "./routes/userRouter";
+import { musicRouter } from "./routes/musicRouter"
 
 dotenv.config();
 const app = express();
@@ -9,6 +10,8 @@ const app = express();
 app.use(express.json());
 
 app.use("/user", userRouter);
+
+app.use("/music", musicRouter)
 
 const server = app.listen(3001, () => {
     if (server) {

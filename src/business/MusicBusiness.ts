@@ -7,7 +7,7 @@ import { MusicDataBase } from "../data/MusicDataBase";
 
 export class MusicBusiness {
 
-    public music = async (title: string, author: string, date: string, file: string, genre: string, album: string)=>{
+    public newMusic = async (title: string, author: string, date: Date, file: string, genre: string[], album: string)=>{
         const id = new IdGenerator().generate()
         await new MusicDataBase().createMusic(
             new Music(
