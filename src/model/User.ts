@@ -10,8 +10,10 @@ export class User{
         switch (this.role) {
             case "NORMAL":
               this.role = UserRole.NORMAL;
+              break;
             case "ADMIN":
               this.role = UserRole.ADMIN;
+              break;
             default:
               throw new Error("Invalid user role");
           }

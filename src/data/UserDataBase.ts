@@ -8,13 +8,14 @@ export class UserDataBase extends BaseDataBase{
     public async createUser (user: User): Promise<void>{
         await this.getConnection()
         .raw(`
-            INSERT INTO ${UserDataBase.TABLE_NAME}(id, email, nickname, password, role)
+            INSERT INTO ${UserDataBase.TABLE_NAME}(id, name, email, nickname, password, role)
              VALUES(
                 "${user.getId()}",
+                "${user.getName()}",
                 "${user.getEmail()}",
                 "${user.getNickName()}",
                 "${user.getPassword()}",
-                "${user.getRole()}",
+                "${user.getRole()}"
             )
         `)
     }

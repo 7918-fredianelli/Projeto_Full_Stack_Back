@@ -7,16 +7,23 @@ import { User } from "../model/User";
 export class UserBusiness {
 
     public signUp = async (name: string, email: string, nickname: string, password: string, role: string)=>{
-        await new UserDataBase().createUser(
+       const id = new IdGenerator().generate()
+       const hashPassword = await new HashManager().hash(password)
+       await new UserDataBase().createUser(
             new User(
-                new IdGenerator().generate(),
+                id,
                 name,
                 email,
                 nickname,
-                password,
+                hashPassword,
                 role,
-            )
+                )
         )
+        const token = new Authenticator().generateToken({
+            id,
+            role
+        })
+        return token
     }
 
 }
