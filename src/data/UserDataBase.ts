@@ -1,5 +1,5 @@
 import { BaseDataBase } from "./BaseDataBase";
-import { User } from "../model/User";
+import { GetUser, User } from "../model/User";
 
 export class UserDataBase extends BaseDataBase{
 
@@ -16,6 +16,18 @@ export class UserDataBase extends BaseDataBase{
                 "${user.getNickName()}",
                 "${user.getPassword()}",
                 "${user.getRole()}"
+            )
+        `)
+    }
+
+    public async conectUser (user: GetUser): Promise<void>{
+        await this.getConnection()
+        .raw(`
+            INSERT INTO ${UserDataBase.TABLE_NAME}(email, nickname, password)
+             VALUES(
+                "${user.getEmail()}",
+                "${user.getNickName()}",
+                "${user.getPassword()}"
             )
         `)
     }

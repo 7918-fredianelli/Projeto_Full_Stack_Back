@@ -2,7 +2,7 @@ import { UserDataBase } from "../data/UserDataBase";
 import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
-import { User } from "../model/User";
+import { GetUser, User } from "../model/User";
 
 export class UserBusiness {
 
@@ -25,5 +25,21 @@ export class UserBusiness {
         })
         return token
     }
+
+    public login = async (email: string, nickname: string, password: string)=>{
+        const hashPassword = await new HashManager().hash(password)
+        await new UserDataBase().conectUser(
+            new GetUser(
+                email,
+                nickname,
+                hashPassword
+            )
+         )
+         const token = new Authenticator().generateToken({
+             id,
+             role
+         })
+         return token
+     }
 
 }

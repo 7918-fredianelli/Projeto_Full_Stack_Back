@@ -49,3 +49,23 @@ export enum UserRole{
     NORMAL = "NORMAL",
     ADMIN = "ADMIN"
 }
+
+export class GetUser{
+    constructor(
+        private email: string,
+        private nickname: string,
+        private password: string,
+    ){}
+
+    getEmail(){
+        return this.email;
+    }
+
+    getNickName(){
+        return this.nickname;
+    }
+
+    getPassword(){
+        return this.password;
+    }
+}
