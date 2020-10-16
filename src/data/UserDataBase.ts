@@ -1,5 +1,5 @@
 import { BaseDataBase } from "./BaseDataBase";
-import { GetUser, User } from "../model/User";
+import { LoginInputDTO, User } from "../model/User";
 
 export class UserDataBase extends BaseDataBase{
 
@@ -20,16 +20,23 @@ export class UserDataBase extends BaseDataBase{
         `)
     }
 
-    public async conectUser (user: GetUser): Promise<void>{
-        await this.getConnection()
-        .raw(`
-            INSERT INTO ${UserDataBase.TABLE_NAME}(email, nickname, password)
-             VALUES(
-                "${user.getEmail()}",
-                "${user.getNickName()}",
-                "${user.getPassword()}"
-            )
-        `)
-    }
+    // public async getUserByEmail (email: string): Promise<User>{
+    //    const result = await this.getConnection()
+    //     .raw(`
+    //         SELECT * FROM ${UserDataBase.TABLE_NAME} WHERE (email) = "${email}"
+    //     `)
+
+    //     return User.toUserModel(result[0]);
+    // }
+
+    public async getUserByEmail(email: string): Promise<User> {
+        const result = await this.getConnection()
+          .select("*")
+          .from(UserDataBase.TABLE_NAME)
+          .where({ email });
+    
+        return User.toUserModel(result[0]);
+      }
+    
 
 }

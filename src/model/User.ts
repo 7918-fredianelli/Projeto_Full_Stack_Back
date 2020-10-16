@@ -43,6 +43,10 @@ export class User{
         return this.role;
     }
 
+    static toUserModel(user: any): User {
+        return new User(user.id, user.name, user.email, user.nicjname, user.password, user.role);
+    }
+
 }
 
 export enum UserRole{
@@ -50,22 +54,7 @@ export enum UserRole{
     ADMIN = "ADMIN"
 }
 
-export class GetUser{
-    constructor(
-        private email: string,
-        private nickname: string,
-        private password: string,
-    ){}
-
-    getEmail(){
-        return this.email;
-    }
-
-    getNickName(){
-        return this.nickname;
-    }
-
-    getPassword(){
-        return this.password;
-    }
+export interface LoginInputDTO{
+    email: string;
+    password: string;
 }
