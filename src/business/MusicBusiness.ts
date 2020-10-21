@@ -7,8 +7,13 @@ import { MusicDataBase } from "../data/MusicDataBase";
 
 export class MusicBusiness {
 
-    public newMusic = async (title: string, author: string, date: Date, file: string, genre: string[], album: string)=>{
-        const id = new IdGenerator().generate()
+    public newMusic = async (token: string, title: string, author: string, date: Date, file: string, genre: string[], album: string)=>{
+        const authenticator = new Authenticator();
+        const userData = authenticator.getData(token);
+        const userId = userData.id;
+
+        const id = new IdGenerator().generate();
+    
         await new MusicDataBase().createMusic(
             new Music(
                 id,
@@ -20,6 +25,16 @@ export class MusicBusiness {
                 album,
             )
         )
+    }
+
+    async getAllMusics(token: string){
+        
+        const authenticator = new Authenticator;
+        const authennticationData = authenticator.getData(token);
+        const userId = authennticationData.id;
+
+        const musicDataBase = new MusicDataBase();
+
     }
 
 }
