@@ -31,10 +31,15 @@ export class MusicBusiness {
         
         const authenticator = new Authenticator;
         const authennticationData = authenticator.getData(token);
-        const userId = authennticationData.id;
 
-        const musicDataBase = new MusicDataBase();
+        const allMusics = await new MusicDataBase().getAllMusics();
 
+        if(!allMusics.length){
+            throw new Error("Nenhuma música encontrada")
+        }
+        return allMusics
     }
+
+
 
 }

@@ -21,5 +21,13 @@ export class MusicDataBase extends BaseDataBase{
         `)
     }
 
+    public async getAllMusics():Promise<Music[]>{
+       const result = await this.getConnection()
+        .raw(`
+            SELECT * FROM ${MusicDataBase.TABLE_NAME}
+        `)
+        return result[0]
+    }
+
 }
     

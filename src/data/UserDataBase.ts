@@ -20,23 +20,23 @@ export class UserDataBase extends BaseDataBase{
         `)
     }
 
-    // public async getUserByEmail (email: string): Promise<User>{
-    //    const result = await this.getConnection()
-    //     .raw(`
-    //         SELECT * FROM ${UserDataBase.TABLE_NAME} WHERE (email) = "${email}"
-    //     `)
+    public async getUserByEmail (email: string): Promise<User>{
+       const result = await this.getConnection()
+        .raw(`
+            SELECT * FROM ${UserDataBase.TABLE_NAME} WHERE email = "${email}"
+        `)
 
+        return User.toUserModel(result[0][0]);
+    }
+
+    // public async getUserByEmail(email: string): Promise<User> {
+    //     const result = await this.getConnection()
+    //       .select("*")
+    //       .from(UserDataBase.TABLE_NAME)
+    //       .where({ email });
+    
     //     return User.toUserModel(result[0]);
     // }
-
-    public async getUserByEmail(email: string): Promise<User> {
-        const result = await this.getConnection()
-          .select("*")
-          .from(UserDataBase.TABLE_NAME)
-          .where({ email });
-    
-        return User.toUserModel(result[0]);
-      }
     
 
 }
