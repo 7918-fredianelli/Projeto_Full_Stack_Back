@@ -53,6 +53,15 @@ export class MusicBusiness {
         return musicId
     }
 
+    async deleteMusicById(token: string, id: string){
+        const authenticator = new Authenticator;
+        const authenticationData = authenticator.getData(token);
 
+        const musicId = await new MusicDataBase().deleteMusicById(id);
+
+        if(!this.getMusicById.length){
+            throw new Error("Nenhuma música encontrada")
+        }
+    }
 
 }

@@ -55,19 +55,23 @@ export class MusicController{
         await BaseDataBase.destroyConnection();
     }
 
-    // async deleteMusicById(req: Request, res: Response){
-    //     try{
-    //         const token = req.headers.authorization as string
-    //         const id = req.body.id
+    async deleteMusicById(req: Request, res: Response){
+        try{
+            const token = req.headers.authorization as string
+            const id = req.body.id
 
-    //         const musicBusiness = new MusicBusiness();
-    //         const result = await musicBusiness.deleteMusicById(id, token);
+            const musicBusiness = new MusicBusiness();
+            await musicBusiness.deleteMusicById(token, id);
 
-    //         res.status(200).send(result)
-    //     }catch(error){
-    //         res.status(400).send(error.message);
-    //     }
+            
 
-    //     await BaseDataBase.destroyConnection();
-    // }
+            res.status(200).send({
+                message: `Musica deletada!`
+            })
+        }catch(error){
+            res.status(400).send(error.message);
+        }
+
+        await BaseDataBase.destroyConnection();
+    }
 }

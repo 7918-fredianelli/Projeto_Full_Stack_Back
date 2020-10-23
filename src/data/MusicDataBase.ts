@@ -37,5 +37,12 @@ export class MusicDataBase extends BaseDataBase{
         return result[0]
     }
 
+    public async deleteMusicById(id: string): Promise<void>{
+        const result = await this.getConnection()
+        .raw(`
+            DELETE FROM ${MusicDataBase.TABLE_NAME} WHERE id = "${id}"
+        `)
+    }
+
 }
     
