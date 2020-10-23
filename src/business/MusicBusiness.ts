@@ -30,7 +30,7 @@ export class MusicBusiness {
     async getAllMusics(token: string){
         
         const authenticator = new Authenticator;
-        const authennticationData = authenticator.getData(token);
+        const authenticationData = authenticator.getData(token);
 
         const allMusics = await new MusicDataBase().getAllMusics();
 
@@ -38,6 +38,19 @@ export class MusicBusiness {
             throw new Error("Nenhuma música encontrada")
         }
         return allMusics
+    }
+
+    async getMusicById(token: string, id: string){
+
+        const authenticator = new Authenticator;
+        const authenticationData = authenticator.getData(token);
+
+        const musicId = await new MusicDataBase().getMusicById(id);
+
+        if(!this.getMusicById.length){
+            throw new Error("Nenhuma música encontrada")
+        }
+        return musicId
     }
 
 

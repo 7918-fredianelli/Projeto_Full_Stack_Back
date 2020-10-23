@@ -29,5 +29,13 @@ export class MusicDataBase extends BaseDataBase{
         return result[0]
     }
 
+    public async getMusicById(id: string): Promise<Music>{
+        const result = await this.getConnection()
+        .raw(`
+            SELECT * FROM ${MusicDataBase.TABLE_NAME} WHERE id = "${id}"
+        `)
+        return result[0]
+    }
+
 }
     
